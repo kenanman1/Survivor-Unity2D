@@ -1,10 +1,14 @@
 ﻿using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(EnemyMovenment))]
 public class Enemy : MonoBehaviour
 {
+    [Header("Components")]
+    EnemyMovenment enemyMovenment;
+    EnemyAttack enemyAttack;
+
     [Header("Enemy Settings")]
-    [SerializeField] float speed = 1f;
     [SerializeField] float playerDetection = 1f;
     [SerializeField] float fadeTime = 0.6f;
 
@@ -16,9 +20,15 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        GetComponent<SpriteRenderer>().enabled = false;
         SpriteRenderer[] spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
         spawnIndicator = spriteRenderers.FirstOrDefault(sr => sr.gameObject.name == "Spawn Indicator");
+        enemyMovenment = GetComponent<EnemyMovenment>();
+        enemyAttack = GetComponent<EnemyAttack>();
+        StartSpawnSequence();
+    }
+
+    void StartSpawnSequence()
+    {
         spawnIndicator.color = gameObject.name switch
         {
             var name when name.Contains("purple") => new Color(0.5f, 0, 0.5f),
@@ -31,37 +41,31 @@ public class Enemy : MonoBehaviour
 
     void StartFollow()
     {
-        spawnIndicator.enabled = false;
-        GetComponent<SpriteRenderer>().enabled = true;
-
+        SwitchRenderer();
         follow = GameObject.FindGameObjectWithTag("Player");
         if (follow == null)
             Destroy(gameObject);
+        enemyMovenment.SetFollow(follow);
+        enemyAttack.SetFollow(follow);
+    }
+
+    void SwitchRenderer()
+    {
+        if (spawnIndicator.enabled == false)
+        {
+            spawnIndicator.enabled = true;
+            GetComponent<SpriteRenderer>().enabled = false;
+        }
+        else
+        {
+            spawnIndicator.enabled = false;
+            GetComponent<SpriteRenderer>().enabled = true;
+        }
     }
 
     void Update()
     {
-        Follow();
-        Attack();
-    }
 
-    void Follow()
-    {
-        if (follow == null)
-            return;
-
-        transform.position = Vector3.MoveTowards(transform.position, follow.transform.position, speed * Time.deltaTime);
-    }
-
-    void Attack()
-    {
-        if (follow == null)
-            return;
-
-        if (Vector3.Distance(transform.position, follow.transform.position) < playerDetection)
-        {
-            Die();
-        }
     }
 
     void Die()

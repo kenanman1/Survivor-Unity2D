@@ -94,7 +94,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3675614882832035062}
   - component: {fileID: 9153126793026633394}
+  - component: {fileID: 4646023153302897852}
   - component: {fileID: 8416415676024609074}
+  - component: {fileID: 7137314339148713636}
   - component: {fileID: 812811196620824155}
   m_Layer: 0
   m_Name: Enemy_purple
@@ -126,7 +128,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6776786582113387684}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -171,6 +173,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4646023153302897852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6776786582113387684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be6b103eecd93b45978ca6928dedbba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
 --- !u!114 &8416415676024609074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,10 +198,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34cda91fec62aae40954b176ded10c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
   playerDetection: 1
   fadeTime: 0.6
   particle: {fileID: 5520000442056542173, guid: 7a3cd9d4dc0197c4b814aea57ac30802, type: 3}
+--- !u!114 &7137314339148713636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6776786582113387684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ecb517e7984a84e8d2a55c7fb247a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 1
+  attackDelay: 1
+  playerDetection: 1
 --- !u!58 &812811196620824155
 CircleCollider2D:
   m_ObjectHideFlags: 0
