@@ -7,7 +7,7 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] float attackDelay = 1f;
     [SerializeField] float playerDetection = 1f;
 
-    GameObject follow;
+    Player player;
     float attackTimer;
 
     void Start()
@@ -20,21 +20,21 @@ public class EnemyAttack : MonoBehaviour
         Attack();
     }
 
-    public void SetFollow(GameObject follow)
+    public void SetFollow(Player player)
     {
-        this.follow = follow;
+        this.player = player;
     }
 
     void Attack()
     {
-        if (follow == null)
+        if (player == null)
             return;
 
-        if (Vector3.Distance(transform.position, follow.transform.position) < playerDetection)
+        if (Vector3.Distance(transform.position, player.transform.position) < playerDetection)
         {
             if (attackDelay <= 0)
             {
-                print("Attack");
+                player.TakeDamageFromPlayer(attackDamage);
                 Wait();
             }
             else

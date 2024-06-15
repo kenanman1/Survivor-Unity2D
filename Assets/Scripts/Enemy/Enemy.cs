@@ -1,9 +1,18 @@
 ﻿using System.Linq;
 using UnityEngine;
 
+enum ColorType
+{
+    Purple,
+    Yellow,
+    Red,
+    White
+}
+
 [RequireComponent(typeof(EnemyMovenment))]
 public class Enemy : MonoBehaviour
 {
+
     [Header("Components")]
     EnemyMovenment enemyMovenment;
     EnemyAttack enemyAttack;
@@ -16,10 +25,18 @@ public class Enemy : MonoBehaviour
     [SerializeField] ParticleSystem particle;
 
     SpriteRenderer spawnIndicator;
-    GameObject follow;
+    Player player;
+    ColorType colorType;
 
     void Start()
     {
+        colorType = gameObject.name switch
+        {
+            var name when name.Contains("purple") => ColorType.Purple,
+            var name when name.Contains("yellow") => ColorType.Yellow,
+            var name when name.Contains("red") => ColorType.Red,
+            _ => ColorType.White,
+        };
         SpriteRenderer[] spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
         spawnIndicator = spriteRenderers.FirstOrDefault(sr => sr.gameObject.name == "Spawn Indicator");
         enemyMovenment = GetComponent<EnemyMovenment>();
@@ -29,24 +46,19 @@ public class Enemy : MonoBehaviour
 
     void StartSpawnSequence()
     {
-        spawnIndicator.color = gameObject.name switch
-        {
-            var name when name.Contains("purple") => new Color(0.5f, 0, 0.5f),
-            var name when name.Contains("yellow") => Color.yellow,
-            var name when name.Contains("red") => Color.red,
-            _ => Color.white,
-        };
+        spawnIndicator.color = GetColor();
         LeanTween.alpha(spawnIndicator.gameObject, 0, fadeTime).setLoopPingPong(2).setEaseInOutSine().setOnComplete(StartFollow);
     }
 
     void StartFollow()
     {
         SwitchRenderer();
-        follow = GameObject.FindGameObjectWithTag("Player");
-        if (follow == null)
+
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        if (player == null)
             Destroy(gameObject);
-        enemyMovenment.SetFollow(follow);
-        enemyAttack.SetFollow(follow);
+        enemyMovenment.SetFollow(player);
+        enemyAttack.SetFollow(player);
     }
 
     void SwitchRenderer()
@@ -72,13 +84,8 @@ public class Enemy : MonoBehaviour
     {
         ParticleSystem particleInstance = Instantiate(particle, transform.position, Quaternion.identity);
         var main = particleInstance.main;
-        main.startColor = gameObject.name switch
-        {
-            var name when name.Contains("purple") => new Color(0.5f, 0, 0.5f),
-            var name when name.Contains("yellow") => Color.yellow,
-            var name when name.Contains("red") => Color.red,
-            _ => Color.white,
-        };
+        main.startColor = GetColor();
+
         particleInstance.Play();
 
         Destroy(gameObject);
@@ -88,5 +95,16 @@ public class Enemy : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, playerDetection);
+    }
+
+    Color GetColor()
+    {
+        return colorType switch
+        {
+            ColorType.Red => Color.red,
+            ColorType.Yellow => Color.yellow,
+            ColorType.Purple => new Color(0.5f, 0, 0.5f),
+            _ => Color.white,
+        };
     }
 }
