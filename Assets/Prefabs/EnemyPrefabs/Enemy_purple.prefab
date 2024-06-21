@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8937695923002302968}
   - component: {fileID: 3462383972140852723}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spawn Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,9 +98,9 @@ GameObject:
   - component: {fileID: 8416415676024609074}
   - component: {fileID: 7137314339148713636}
   - component: {fileID: 812811196620824155}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Enemy_purple
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
