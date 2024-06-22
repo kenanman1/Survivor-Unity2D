@@ -5,7 +5,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] float speed = 20f;
     [SerializeField] float damage = 25f;
 
-    bool hasHit = false;
+    bool hasHit = false; // Prevents multiple hits
     Rigidbody2D rigidbody2D;
     GameObject enemy;
 
@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, enemy.transform.position, speed * Time.deltaTime);
         else
             Destroy(gameObject);
-    }
+    } 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
