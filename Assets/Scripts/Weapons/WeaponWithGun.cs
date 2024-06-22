@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class WeaponWithGun : MonoBehaviour
 {
+    [Header("Weapon Settings")]
     [SerializeField] float enemyDetectionRadius = 5f;
     [SerializeField] float attackReload = 1f;
     [SerializeField] float rotationSpeed = 0.2f;
+
+    [SerializeField] GameObject bulletObject;
 
     LayerMask enemyLayer;
     float timeReload;
@@ -14,6 +17,7 @@ public class Weapon : MonoBehaviour
     {
         enemyLayer = LayerMask.GetMask("Enemy");
         timeReload = attackReload;
+
     }
 
     void Update()
@@ -27,7 +31,9 @@ public class Weapon : MonoBehaviour
         {
             if (attackReload <= 0)
             {
-                print("Attack");
+                GameObject bulletInstance = Instantiate(bulletObject, transform.position, Quaternion.identity);
+                Bullet bullet = bulletInstance.GetComponent<Bullet>();
+                bullet.SetEnemy(closestEnemy);
                 Wait();
             }
             else

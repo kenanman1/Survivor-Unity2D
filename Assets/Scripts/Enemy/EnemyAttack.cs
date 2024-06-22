@@ -34,7 +34,7 @@ public class EnemyAttack : MonoBehaviour
         {
             if (attackDelay <= 0)
             {
-                player.TakeDamageFromPlayer(attackDamage);
+                player.GetComponent<PlayerController>().TakeDamageFromPlayer(attackDamage);
                 Wait();
             }
             else
@@ -45,5 +45,11 @@ public class EnemyAttack : MonoBehaviour
     void Wait()
     {
         attackDelay = attackTimer;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, playerDetection);
     }
 }

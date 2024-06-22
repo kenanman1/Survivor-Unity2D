@@ -48,6 +48,9 @@ TagManager:
   - name: Enemy
     uniqueID: 4262166517
     locked: 0
+  - name: Gun
+    uniqueID: 2821759693
+    locked: 0
   - name: Bush
     uniqueID: 2373852355
     locked: 0

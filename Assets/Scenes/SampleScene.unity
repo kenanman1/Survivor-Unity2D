@@ -178,7 +178,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1553417012228258969, guid: e20bd2a1ddbe3b948af02b08b2d606f7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: e20bd2a1ddbe3b948af02b08b2d606f7, type: 3}
 --- !u!1 &33675499
 GameObject:
@@ -717,8 +720,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1473207603
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 84f07b27a38eda042b5858622cbeaf52, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -743,8 +746,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f051a1ce443220c4b8c2c13b228fef2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyDetectionRadius: 5
+  enemyDetectionRadius: 10
   attackReload: 1
+  rotationSpeed: 0.2
+  bulletObject: {fileID: 2825165252477072610, guid: 1e926274f6b925448aa80d5939efc63d, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,7 +1109,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 0000000013af2945c31c7e8df57f0bfe
+  m_ApplyToSortingLayers: 0000000013af2945c31c7e8df57f0bfecda230a8
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -3674,7 +3679,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1921114941
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f19254063d103c049a1ca51a22be23ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3870,7 +3875,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1553417012228258969, guid: e20bd2a1ddbe3b948af02b08b2d606f7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: e20bd2a1ddbe3b948af02b08b2d606f7, type: 3}
 --- !u!1 &1142812016
 GameObject:
@@ -4263,7 +4271,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1921114941
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f19254063d103c049a1ca51a22be23ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4347,7 +4355,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1921114941
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f19254063d103c049a1ca51a22be23ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4492,6 +4500,7 @@ GameObject:
   - component: {fileID: 1964763424}
   - component: {fileID: 1964763425}
   - component: {fileID: 1964763426}
+  - component: {fileID: 1964763427}
   - component: {fileID: 1964763423}
   m_Layer: 0
   m_Name: Player
@@ -4711,6 +4720,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+--- !u!114 &1964763427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964763417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 193e1130f384b1840a8bc96ea53c401d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &762889297994284670
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4766,7 +4787,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1553417012228258969, guid: e20bd2a1ddbe3b948af02b08b2d606f7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: e20bd2a1ddbe3b948af02b08b2d606f7, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
