@@ -95,8 +95,9 @@ GameObject:
   - component: {fileID: 4736376446781890706}
   - component: {fileID: 6007789322110814024}
   - component: {fileID: 6560111901017733703}
+  - component: {fileID: 5153189210451348701}
   m_Layer: 3
-  m_Name: Enemy Health Text
+  m_Name: Enemy Damage Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,15 +112,15 @@ RectTransform:
   m_GameObject: {fileID: 1553417012228258969}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3675614882832035062}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.05, y: 1.1}
-  m_SizeDelta: {x: 20, y: 5}
+  m_AnchoredPosition: {x: -0.0171, y: 1.1}
+  m_SizeDelta: {x: 18.6498, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &6007789322110814024
 MeshRenderer:
@@ -159,8 +160,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 906640455
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &6560111901017733703
@@ -205,20 +206,20 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
+  m_TextStyleHashCode: 97690656
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -255,6 +256,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 6007789322110814024}
   m_maskType: 0
+--- !u!114 &5153189210451348701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1553417012228258969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f8476246316af74e8abd4fa7d4bc607, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textParticleDuration: 0.2
+  textScaleAnimation: 0.08
+  textMoveAnimation: 0.4
 --- !u!1 &6776786582113387684
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,7 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5be6b103eecd93b45978ca6928dedbba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 2
 --- !u!114 &8416415676024609074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,7 +416,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfabbda182539c1469ceb3c949df2430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealthText: {fileID: 6560111901017733703}
   health: 100
   particle: {fileID: 5520000442056542173, guid: 7a3cd9d4dc0197c4b814aea57ac30802, type: 3}
 --- !u!114 &1291905647208328294
@@ -422,7 +437,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6776786582113387684}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:

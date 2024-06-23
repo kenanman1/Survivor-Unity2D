@@ -1,9 +1,7 @@
-using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] TextMeshPro enemyHealthText;
     [Header("Enemy Settings")]
     public float health = 100;
 
@@ -12,22 +10,22 @@ public class EnemyHealth : MonoBehaviour
 
     private void Start()
     {
-        enemyHealthText.text = health.ToString();
+
     }
 
     public void TakeDamageFromEnemy(float damage)
     {
         health -= damage;
-        enemyHealthText.text = health.ToString();
         if (health <= 0)
             Die();
+        GetComponent<EnemyController>().DamageTextEffect(damage);
     }
 
     void Die()
     {
         ParticleSystem particleInstance = Instantiate(particle, transform.position, Quaternion.identity);
         var main = particleInstance.main;
-        main.startColor = GetComponent<Enemy>().GetColor();
+        main.startColor = GetComponent<EnemyController>().GetColor();
         particleInstance.Play();
 
         Destroy(gameObject);

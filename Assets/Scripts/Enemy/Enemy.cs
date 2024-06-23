@@ -4,12 +4,12 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyMovenment))]
 [RequireComponent(typeof(EnemyAttack))]
 [RequireComponent(typeof(EnemyHealth))]
+[RequireComponent(typeof(EnemyController))]
 public class Enemy : MonoBehaviour
 {
     [Header("Components")]
     EnemyMovenment enemyMovenment;
     EnemyAttack enemyAttack;
-    EnemyHealth enemyHealth;
 
     [Header("Enemy Settings")]
     [SerializeField] float fadeTime = 0.6f;
@@ -28,12 +28,13 @@ public class Enemy : MonoBehaviour
 
     void StartSpawnSequence()
     {
-        spawnIndicator.color = GetColor();
+        spawnIndicator.color = GetComponent<EnemyController>().GetColor();
         LeanTween.alpha(spawnIndicator.gameObject, 0, fadeTime).setLoopPingPong(2).setEaseInOutSine().setOnComplete(StartFollow);
     }
 
     void StartFollow()
     {
+        GetComponent<Collider2D>().enabled = true;
         SwitchRenderer();
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -55,16 +56,5 @@ public class Enemy : MonoBehaviour
             spawnIndicator.enabled = false;
             GetComponent<SpriteRenderer>().enabled = true;
         }
-    }
-
-    public Color GetColor()
-    {
-        return gameObject.name switch
-        {
-            var name when name.Contains("purple") => new Color(0.5f, 0, 0.5f),
-            var name when name.Contains("yellow") => Color.yellow,
-            var name when name.Contains("red") => Color.red,
-            _ => Color.white,
-        };
     }
 }

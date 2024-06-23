@@ -54,3 +54,6 @@ TagManager:
   - name: Bush
     uniqueID: 2373852355
     locked: 0
+  - name: Text
+    uniqueID: 906640455
+    locked: 0

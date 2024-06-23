@@ -17,7 +17,6 @@ public class WeaponWithGun : MonoBehaviour
     {
         enemyLayer = LayerMask.GetMask("Enemy");
         timeReload = attackReload;
-
     }
 
     void Update()
@@ -51,15 +50,12 @@ public class WeaponWithGun : MonoBehaviour
         float minDistance = Mathf.Infinity;
         foreach (Collider2D collider in colliders)
         {
-            if (collider.GetComponentInParent<SpriteRenderer>().enabled)
+            float distance = Vector3.Distance(transform.position, collider.transform.position);
+            if (distance < minDistance)
             {
-                float distance = Vector3.Distance(transform.position, collider.transform.position);
-                if (distance < minDistance)
-                {
-                    minDistance = distance;
-                    closestEnemy = collider.gameObject;
-                    isEnemyNearby = true;
-                }
+                minDistance = distance;
+                closestEnemy = collider.gameObject;
+                isEnemyNearby = true;
             }
         }
         if (isEnemyNearby)
