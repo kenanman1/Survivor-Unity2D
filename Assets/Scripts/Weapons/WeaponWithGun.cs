@@ -3,28 +3,28 @@ using UnityEngine;
 public class WeaponWithGun : MonoBehaviour
 {
     [Header("Weapon Settings")]
-    [SerializeField] float enemyDetectionRadius = 5f;
-    [SerializeField] float attackReload = 1f;
-    [SerializeField] float rotationSpeed = 0.2f;
+    [SerializeField] private float enemyDetectionRadius = 5f;
+    [SerializeField] private float attackReload = 1f;
+    [SerializeField] private float rotationSpeed = 0.2f;
 
-    [SerializeField] GameObject bulletObject;
+    [SerializeField] private GameObject bulletObject;
 
-    LayerMask enemyLayer;
-    float timeReload;
-    GameObject closestEnemy;
+    private LayerMask enemyLayer;
+    private float timeReload;
+    private GameObject closestEnemy;
 
-    void Start()
+    private void Start()
     {
         enemyLayer = LayerMask.GetMask("Enemy");
         timeReload = attackReload;
     }
 
-    void Update()
+    private void Update()
     {
         Attack();
     }
 
-    void Attack()
+    private void Attack()
     {
         if (CheckForNearbyEnemies())
         {
@@ -40,7 +40,7 @@ public class WeaponWithGun : MonoBehaviour
         }
     }
 
-    bool CheckForNearbyEnemies()
+    private bool CheckForNearbyEnemies()
     {
         bool isEnemyNearby = false;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, enemyDetectionRadius, enemyLayer);
@@ -63,7 +63,7 @@ public class WeaponWithGun : MonoBehaviour
         return isEnemyNearby;
     }
 
-    void Aim(Collider2D enemy)
+    private void Aim(Collider2D enemy)
     {
         Vector3 direction = enemy.transform.position - transform.position;
         direction.Normalize();
@@ -72,7 +72,7 @@ public class WeaponWithGun : MonoBehaviour
         LeanTween.rotate(gameObject, rotation.eulerAngles, rotationSpeed);
     }
 
-    void Wait()
+    private void Wait()
     {
         attackReload = timeReload;
     }

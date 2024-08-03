@@ -6,9 +6,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("Player Settings")]
-    PlayerHealth playerHealth;
+    private PlayerHealth playerHealth;
 
-    void Start()
+    private void Start()
     {
         playerHealth = GetComponent<PlayerHealth>();
     }

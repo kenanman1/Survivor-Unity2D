@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour
     private float health;
 
     [Header("UI")]
-    [SerializeField] TextMeshProUGUI playerHealthText;
+    [SerializeField] private TextMeshProUGUI playerHealthText;
 
     private void Start()
     {
@@ -29,10 +29,9 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        print("Player died");
     }
 
-    void UpdateText()
+    private void UpdateText()
     {
         playerHealthText.text = $"Health: {health}/{maxHealth}";
     }

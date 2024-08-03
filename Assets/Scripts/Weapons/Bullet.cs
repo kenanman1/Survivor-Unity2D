@@ -2,16 +2,27 @@
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] float speed = 20f;
-    [SerializeField] float damage = 25f;
+    [SerializeField] private float speed = 20f;
+    [SerializeField] private float damage = 25f;
+    [SerializeField] private float lifeTime = 5f;
 
-    bool hasHit = false; // Prevents multiple hits
-    Rigidbody2D rigidbody2D;
-    GameObject enemy;
+    private bool hasHit = false; // Prevents multiple hits
+    private Rigidbody2D rigidbody2D;
+    private GameObject enemy;
 
-    void Start()
+    private void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
+        if (enemy != null)
+        {
+            Vector2 direction = (enemy.transform.position - transform.position).normalized;
+            rigidbody2D.velocity = direction * speed;
+        }
+    }
+
+    public void Wait()
+    {
+        Destroy(gameObject, lifeTime);
     }
 
     public void SetEnemy(GameObject enemy)
@@ -19,12 +30,9 @@ public class Bullet : MonoBehaviour
         this.enemy = enemy;
     }
 
-    void Update()
+    private void Update()
     {
-        if (enemy != null)
-            transform.position = Vector3.MoveTowards(transform.position, enemy.transform.position, speed * Time.deltaTime);
-        else
-            Destroy(gameObject);
+       Wait();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

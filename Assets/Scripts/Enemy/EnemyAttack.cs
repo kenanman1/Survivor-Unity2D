@@ -3,19 +3,19 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     [Header("Attack Settings")]
-    [SerializeField] float attackDamage = 1f;
-    [SerializeField] float attackDelay = 1f;
-    [SerializeField] float playerDetection = 1f;
+    [SerializeField] private float attackDamage = 1f;
+    [SerializeField] private float attackDelay = 1f;
+    [SerializeField] private float playerDetection = 1f;
 
-    Player player;
-    float attackTimer;
+    private Player player;
+    private float attackTimer;
 
-    void Start()
+    private void Start()
     {
         attackTimer = attackDelay;
     }
 
-    void Update()
+    private void Update()
     {
         Attack();
     }
@@ -25,7 +25,7 @@ public class EnemyAttack : MonoBehaviour
         this.player = player;
     }
 
-    void Attack()
+    private void Attack()
     {
         if (player == null)
             return;
@@ -42,7 +42,7 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
-    void Wait()
+    private void Wait()
     {
         attackDelay = attackTimer;
     }

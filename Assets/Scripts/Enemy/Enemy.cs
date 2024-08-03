@@ -8,43 +8,57 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [Header("Components")]
-    EnemyMovenment enemyMovenment;
-    EnemyAttack enemyAttack;
+    private EnemyMovenment enemyMovenment;
+    private EnemyAttack enemyAttack;
 
     [Header("Enemy Settings")]
-    [SerializeField] float fadeTime = 0.6f;
+    [SerializeField] private float fadeTime = 0.6f;
 
-    SpriteRenderer spawnIndicator;
-    Player player;
+    private SpriteRenderer spawnIndicator;
+    private Player player;
 
-    void Start()
+    private void Awake()
     {
         SpriteRenderer[] spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
         spawnIndicator = spriteRenderers.FirstOrDefault(sr => sr.gameObject.name == "Spawn Indicator");
         enemyMovenment = GetComponent<EnemyMovenment>();
         enemyAttack = GetComponent<EnemyAttack>();
+    }
+
+    private void OnEnable()
+    {
+        // Reset state when the object is taken from the pool
+        ResetState();
+    }
+
+    private void ResetState()
+    {
+        spawnIndicator.enabled = true;
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<Collider2D>().enabled = false;
         StartSpawnSequence();
     }
 
-    void StartSpawnSequence()
+    private void StartSpawnSequence()
     {
         spawnIndicator.color = GetComponent<EnemyController>().GetColor();
         LeanTween.alpha(spawnIndicator.gameObject, 0, fadeTime).setLoopPingPong(2).setEaseInOutSine().setOnComplete(StartFollow);
     }
 
-    void StartFollow()
+    private void StartFollow()
     {
         GetComponent<Collider2D>().enabled = true;
         SwitchRenderer();
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         if (player == null)
-            Destroy(gameObject);
+            return;
+
         enemyMovenment.SetFollow(player);
         enemyAttack.SetFollow(player);
     }
 
-    void SwitchRenderer()
+    private void SwitchRenderer()
     {
         if (spawnIndicator.enabled == false)
         {

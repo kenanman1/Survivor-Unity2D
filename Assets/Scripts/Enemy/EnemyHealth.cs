@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -6,7 +7,7 @@ public class EnemyHealth : MonoBehaviour
     public float health = 100;
 
     [Header("Enemy Effects")]
-    [SerializeField] ParticleSystem particle;
+    [SerializeField] private ParticleSystem particle;
 
     private void Start()
     {
@@ -21,13 +22,15 @@ public class EnemyHealth : MonoBehaviour
         GetComponent<EnemyController>().DamageTextEffect(damage);
     }
 
-    void Die()
+    private void Die()
     {
-        ParticleSystem particleInstance = Instantiate(particle, transform.position, Quaternion.identity);
-        var main = particleInstance.main;
+        ParticleSystem damageParticle = Instantiate(particle);
+        damageParticle.transform.position = transform.position;
+        var main = damageParticle.main;
         main.startColor = GetComponent<EnemyController>().GetColor();
-        particleInstance.Play();
+        damageParticle.Play();
 
-        Destroy(gameObject);
+        GetComponent<EnemyController>().ReleaseEnemyToPool();
     }
+
 }

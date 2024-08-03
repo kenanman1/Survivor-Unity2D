@@ -2,13 +2,24 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    void Start()
+    [SerializeField] private int count = 10;
+
+    private void Start()
     {
         Application.targetFrameRate = 60;
     }
 
-    void Update()
+    private void Update()
     {
+        while (count > 0)
+        {
+            SpawnEnemy();
+            count--;
+        }
+    }
 
+    private void SpawnEnemy()
+    {
+        FindObjectOfType<EnemyPool>().enemyPool.Get();
     }
 }

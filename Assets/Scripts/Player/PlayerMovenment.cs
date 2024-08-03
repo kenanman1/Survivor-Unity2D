@@ -6,9 +6,9 @@ public class PlayerMovenment : MonoBehaviour
     [Header("Player Settings")]
     [SerializeField] private float speed = 10f;
 
-    Rigidbody2D rb;
+    private Rigidbody2D rb;
 
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }

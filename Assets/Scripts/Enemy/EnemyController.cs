@@ -5,10 +5,6 @@ using UnityEngine;
 /// </summary>
 public class EnemyController : MonoBehaviour
 {
-    void Start()
-    {
-    }
-
     public void TakeDamageFromEnemy(float damage)
     {
         GetComponent<EnemyHealth>().TakeDamageFromEnemy(damage);
@@ -28,5 +24,10 @@ public class EnemyController : MonoBehaviour
             var name when name.Contains("red") => Color.red,
             _ => Color.white,
         };
+    }
+
+    internal void ReleaseEnemyToPool()
+    {
+        EnemyPool.Instance.enemyPool.Release(GetComponent<Enemy>());
     }
 }
