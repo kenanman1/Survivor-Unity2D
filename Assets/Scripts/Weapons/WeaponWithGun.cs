@@ -65,8 +65,7 @@ public class WeaponWithGun : MonoBehaviour
 
     private void Aim(Collider2D enemy)
     {
-        Vector3 direction = enemy.transform.position - transform.position;
-        direction.Normalize();
+        Vector3 direction = (enemy.transform.position - transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
         LeanTween.rotate(gameObject, rotation.eulerAngles, rotationSpeed);

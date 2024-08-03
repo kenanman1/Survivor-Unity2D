@@ -7,16 +7,11 @@ public class EnemyMovenment : MonoBehaviour
 
     public Player player;
 
-    private void Follow()
+    public void Follow()
     {
         if (player == null)
             return;
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-    }
-
-    private void Update()
-    {
-        Follow();
     }
 
     public void SetFollow(Player player)

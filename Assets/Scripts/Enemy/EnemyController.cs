@@ -22,6 +22,7 @@ public class EnemyController : MonoBehaviour
             var name when name.Contains("purple") => new Color(0.5f, 0, 0.5f),
             var name when name.Contains("yellow") => Color.yellow,
             var name when name.Contains("red") => Color.red,
+            var name when name.Contains("green") => Color.green,
             _ => Color.white,
         };
     }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private int count = 10;
+    [SerializeField] private int count = 5;
 
     private void Start()
     {

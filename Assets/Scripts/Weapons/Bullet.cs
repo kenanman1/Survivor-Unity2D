@@ -20,6 +20,11 @@ public class Bullet : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        Wait();
+    }
+
     public void Wait()
     {
         Destroy(gameObject, lifeTime);
@@ -28,11 +33,6 @@ public class Bullet : MonoBehaviour
     public void SetEnemy(GameObject enemy)
     {
         this.enemy = enemy;
-    }
-
-    private void Update()
-    {
-       Wait();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

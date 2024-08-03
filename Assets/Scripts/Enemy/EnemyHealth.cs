@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -30,7 +29,15 @@ public class EnemyHealth : MonoBehaviour
         main.startColor = GetComponent<EnemyController>().GetColor();
         damageParticle.Play();
 
-        GetComponent<EnemyController>().ReleaseEnemyToPool();
+        if (GetComponent<RangeEnemy>() != null)
+        {
+            RangeEnemyPool.Instance.enemyPool.Release(GetComponent<RangeEnemy>());
+            //GetComponent<EnemyController>().ReleaseEnemyToPool();
+        }
+        else
+        {
+            GetComponent<EnemyController>().ReleaseEnemyToPool();
+        }
     }
 
 }
