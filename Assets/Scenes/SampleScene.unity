@@ -421,6 +421,51 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 588142425}
   m_ConfineScreenEdges: 1
   m_Damping: 0
+--- !u!1 &263276581
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 263276582}
+  - component: {fileID: 263276583}
+  m_Layer: 0
+  m_Name: SeedPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &263276582
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263276581}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 484981010}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &263276583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263276581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 751ffa05c630ae34880e204a630fb756, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seedPrefab: {fileID: 4671505746414786547, guid: e419047bb35a38b46aed541eddb5fec8, type: 3}
 --- !u!1 &426988284
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,6 +710,7 @@ Transform:
   m_Children:
   - {fileID: 450220539}
   - {fileID: 732311177}
+  - {fileID: 263276582}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &495702422
@@ -764,7 +810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f051a1ce443220c4b8c2c13b228fef2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyDetectionRadius: 9
+  enemyDetectionRadius: 8
   attackReload: 1
   rotationSpeed: 0.2
   bulletObject: {fileID: 2825165252477072610, guid: 1e926274f6b925448aa80d5939efc63d, type: 3}

@@ -1,3 +1,4 @@
+﻿using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -7,25 +8,27 @@ public class RangeEnemyBullet : MonoBehaviour
     [SerializeField] private float damage = 5f;
     [SerializeField] private float lifeTime = 5f;
 
-    private Player player;
+    private Rigidbody2D rb;
 
-    private void Start()
+    private void Awake()
     {
-        if (player != null)
-        {
-            Vector2 direction = (player.transform.position - transform.position).normalized;
-            GetComponent<Rigidbody2D>().velocity = direction * speed;
-        }
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    void OnEnable()
     {
-        Wait();
+        StartCoroutine(AutoReturnToPool(lifeTime));
     }
 
-    public void Wait()
+    private IEnumerator AutoReturnToPool(float delay)
     {
-        Destroy(gameObject, lifeTime);
+        yield return new WaitForSeconds(delay);
+        SeedPool.Instance.seedPool.Release(this);
+    }
+
+    public void SetDirection(Vector3 direction)
+    {
+        rb.velocity = direction * speed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -33,12 +36,7 @@ public class RangeEnemyBullet : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             collision.GetComponent<PlayerController>().TakeDamageFromPlayer(damage);
-            Destroy(gameObject);
+            SeedPool.Instance.seedPool.Release(this);
         }
-    }
-
-    public void SetPlayer(Player player)
-    {
-        this.player = player;
     }
 }

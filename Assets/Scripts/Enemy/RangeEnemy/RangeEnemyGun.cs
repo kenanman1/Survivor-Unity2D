@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RangeEnemyGun : MonoBehaviour
 {
@@ -13,10 +13,13 @@ public class RangeEnemyGun : MonoBehaviour
 
     public void Shoot()
     {
-        Vector3 direction = (player.transform.position - transform.position).normalized;
-        GameObject bulletInstance = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-        RangeEnemyBullet bullet = bulletInstance.GetComponent<RangeEnemyBullet>();
-        bullet.transform.right = direction;
-        bullet.SetPlayer(player);
+        if (player != null)
+        {
+            Vector3 direction = (player.transform.position - transform.position).normalized;
+            RangeEnemyBullet bulletInstance = SeedPool.Instance.seedPool.Get();
+            bulletInstance.transform.position = transform.position;
+            bulletInstance.transform.right = direction;
+            bulletInstance.SetDirection(direction);
+        }
     }
 }
