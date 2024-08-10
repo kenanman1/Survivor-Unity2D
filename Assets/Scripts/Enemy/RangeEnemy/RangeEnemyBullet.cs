@@ -35,6 +35,7 @@ public class RangeEnemyBullet : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            StopAllCoroutines();
             collision.GetComponent<PlayerController>().TakeDamageFromPlayer(damage);
             SeedPool.Instance.seedPool.Release(this);
         }

@@ -283,10 +283,10 @@ GameObject:
   - component: {fileID: 9153126793026633394}
   - component: {fileID: 4646023153302897852}
   - component: {fileID: 8416415676024609074}
-  - component: {fileID: 7137314339148713636}
   - component: {fileID: 5803215842874955082}
   - component: {fileID: 1291905647208328294}
   - component: {fileID: 812811196620824155}
+  - component: {fileID: 6554821289654693821}
   m_Layer: 3
   m_Name: Enemy_purple
   m_TagString: Enemy
@@ -390,21 +390,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeTime: 0.6
---- !u!114 &7137314339148713636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6776786582113387684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0ecb517e7984a84e8d2a55c7fb247a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackDamage: 5
-  attackDelay: 0.5
-  playerDetection: 1
 --- !u!114 &5803215842874955082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,3 +451,18 @@ CircleCollider2D:
   m_Offset: {x: -0.05, y: 0.16457134}
   serializedVersion: 2
   m_Radius: 0.4509979
+--- !u!114 &6554821289654693821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6776786582113387684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40a9982aa9628ad4db99bc53537543de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDelay: 1
+  playerDetection: 1
+  attackDamage: 1

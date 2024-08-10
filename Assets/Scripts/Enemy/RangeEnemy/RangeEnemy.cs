@@ -1,29 +1,18 @@
-using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyMovenment))]
 [RequireComponent(typeof(RangeEnemyAttack))]
-[RequireComponent(typeof(EnemyHealth))]
-[RequireComponent(typeof(EnemyController))]
-public class RangeEnemy : MonoBehaviour
+public class RangeEnemy : Enemy
 {
     [Header("Components")]
-    private EnemyMovenment enemyMovenment;
     private RangeEnemyAttack rangeEnemyAttack;
     private RangeEnemyGun rangeEnemyGun;
 
     [Header("Enemy Settings")]
-    [SerializeField] private float fadeTime = 0.6f;
     [SerializeField] private float rotationSpeed = 0.2f;
 
-    private SpriteRenderer spawnIndicator;
-    private Player player;
-
-    private void Awake()
+    protected override void Awake()
     {
-        SpriteRenderer[] spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
-        spawnIndicator = spriteRenderers.FirstOrDefault(sr => sr.gameObject.name == "Spawn Indicator");
-        enemyMovenment = GetComponent<EnemyMovenment>();
+        base.Awake();
         rangeEnemyAttack = GetComponent<RangeEnemyAttack>();
         rangeEnemyGun = GetComponentInChildren<RangeEnemyGun>();
     }
@@ -34,36 +23,9 @@ public class RangeEnemy : MonoBehaviour
             Aim();
     }
 
-    private void OnEnable()
+    protected override void StartFollow()
     {
-        // Reset state when the object is taken from the pool
-        ResetState();
-    }
-
-    private void ResetState()
-    {
-        spawnIndicator.enabled = true;
-        GetComponent<SpriteRenderer>().enabled = false;
-        GetComponent<Collider2D>().enabled = false;
-        StartSpawnSequence();
-    }
-
-    private void StartSpawnSequence()
-    {
-        spawnIndicator.color = GetComponent<EnemyController>().GetColor();
-        LeanTween.alpha(spawnIndicator.gameObject, 0, fadeTime).setLoopPingPong(2).setEaseInOutSine().setOnComplete(StartFollow);
-    }
-
-    private void StartFollow()
-    {
-        GetComponent<Collider2D>().enabled = true;
-        SwitchRenderer();
-
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        if (player == null)
-            return;
-
-        enemyMovenment.SetFollow(player);
+        base.StartFollow();
         rangeEnemyAttack.SetFollow(player);
         rangeEnemyGun.SetFollow(player);
     }
@@ -77,17 +39,8 @@ public class RangeEnemy : MonoBehaviour
         LeanTween.rotate(gameObject, rotation.eulerAngles, rotationSpeed);
     }
 
-    private void SwitchRenderer()
+    public override void ReleaseEnemyToPool()
     {
-        if (spawnIndicator.enabled == false)
-        {
-            spawnIndicator.enabled = true;
-            GetComponent<SpriteRenderer>().enabled = false;
-        }
-        else
-        {
-            spawnIndicator.enabled = false;
-            GetComponent<SpriteRenderer>().enabled = true;
-        }
+        RangeEnemyPool.Instance.enemyPool.Release(this);
     }
 }

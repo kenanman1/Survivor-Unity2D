@@ -8,11 +8,6 @@ public class EnemyHealth : MonoBehaviour
     [Header("Enemy Effects")]
     [SerializeField] private ParticleSystem particle;
 
-    private void Start()
-    {
-
-    }
-
     public void TakeDamageFromEnemy(float damage)
     {
         health -= damage;
@@ -29,15 +24,6 @@ public class EnemyHealth : MonoBehaviour
         main.startColor = GetComponent<EnemyController>().GetColor();
         damageParticle.Play();
 
-        if (GetComponent<RangeEnemy>() != null)
-        {
-            RangeEnemyPool.Instance.enemyPool.Release(GetComponent<RangeEnemy>());
-            //GetComponent<EnemyController>().ReleaseEnemyToPool();
-        }
-        else
-        {
-            GetComponent<EnemyController>().ReleaseEnemyToPool();
-        }
+        GetComponent<EnemyController>().ReleaseEnemyToPool();
     }
-
 }

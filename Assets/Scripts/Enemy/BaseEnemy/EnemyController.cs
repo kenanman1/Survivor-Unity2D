@@ -29,6 +29,8 @@ public class EnemyController : MonoBehaviour
 
     internal void ReleaseEnemyToPool()
     {
-        EnemyPool.Instance.enemyPool.Release(GetComponent<Enemy>());
+        var enemy = GetComponent<Enemy>();
+        if (enemy != null)
+            enemy.ReleaseEnemyToPool();
     }
 }

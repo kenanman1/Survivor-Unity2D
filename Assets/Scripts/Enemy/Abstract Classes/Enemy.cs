@@ -1,42 +1,38 @@
-﻿using System.Linq;
+using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyMovenment))]
-[RequireComponent(typeof(EnemyAttack))]
+/// <summary>
+/// Abstract base class for all enemy types in the game.
+/// </summary>
 [RequireComponent(typeof(EnemyHealth))]
+[RequireComponent(typeof(EnemyMovenment))]
 [RequireComponent(typeof(EnemyController))]
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
     [Header("Components")]
-    private EnemyMovenment enemyMovenment;
-    private EnemyAttack enemyAttack;
+    protected EnemyMovenment enemyMovenment;
 
     [Header("Enemy Settings")]
-    [SerializeField] private float fadeTime = 0.6f;
+    [SerializeField] protected float fadeTime = 0.6f;
 
-    private SpriteRenderer spawnIndicator;
-    private Player player;
+    protected SpriteRenderer spawnIndicator;
+    protected Player player;
 
-    private void Awake()
+    public abstract void ReleaseEnemyToPool();
+
+    protected virtual void Awake()
     {
         SpriteRenderer[] spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
         spawnIndicator = spriteRenderers.FirstOrDefault(sr => sr.gameObject.name == "Spawn Indicator");
         enemyMovenment = GetComponent<EnemyMovenment>();
-        enemyAttack = GetComponent<EnemyAttack>();
     }
-
-    private void OnEnable()
+    protected void OnEnable()
     {
         // Reset state when the object is taken from the pool
         ResetState();
     }
 
-    public void Update()
-    {
-        GetComponent<EnemyMovenment>().Follow();
-    }
-
-    private void ResetState()
+    protected void ResetState()
     {
         spawnIndicator.enabled = true;
         GetComponent<SpriteRenderer>().enabled = false;
@@ -44,26 +40,13 @@ public class Enemy : MonoBehaviour
         StartSpawnSequence();
     }
 
-    private void StartSpawnSequence()
+    protected void StartSpawnSequence()
     {
         spawnIndicator.color = GetComponent<EnemyController>().GetColor();
         LeanTween.alpha(spawnIndicator.gameObject, 0, fadeTime).setLoopPingPong(2).setEaseInOutSine().setOnComplete(StartFollow);
     }
 
-    private void StartFollow()
-    {
-        GetComponent<Collider2D>().enabled = true;
-        SwitchRenderer();
-
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        if (player == null)
-            return;
-
-        enemyMovenment.SetFollow(player);
-        enemyAttack.SetFollow(player);
-    }
-
-    private void SwitchRenderer()
+    protected void SwitchRenderer()
     {
         if (spawnIndicator.enabled == false)
         {
@@ -75,5 +58,17 @@ public class Enemy : MonoBehaviour
             spawnIndicator.enabled = false;
             GetComponent<SpriteRenderer>().enabled = true;
         }
+    }
+
+    protected virtual void StartFollow()
+    {
+        GetComponent<Collider2D>().enabled = true;
+        SwitchRenderer();
+
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        if (player == null)
+            return;
+
+        enemyMovenment.SetFollow(player);
     }
 }

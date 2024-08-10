@@ -1,10 +1,9 @@
 using UnityEngine;
 
-public class RangeEnemyAttack : EnemyAttack
+public class MeleeEnemyAttack : EnemyAttack
 {
     [Header("Attack Settings")]
-    [SerializeField] private float scaleAnimation = 0.3f;
-    [SerializeField] private float scaleAnimationTime = 0.2f;
+    [SerializeField] private float attackDamage = 1f;
 
     protected override void Start()
     {
@@ -25,16 +24,11 @@ public class RangeEnemyAttack : EnemyAttack
         {
             if (attackDelay <= 0)
             {
-                GetComponentInChildren<RangeEnemyGun>().Shoot();
-                LeanTween.moveLocal(gameObject, transform.localPosition + Vector3.up * scaleAnimation, scaleAnimationTime).setLoopPingPong(1);
+                player.GetComponent<PlayerController>().TakeDamageFromPlayer(attackDamage);
                 Wait();
             }
             else
                 attackDelay -= Time.deltaTime;
-        }
-        else
-        {
-            GetComponent<EnemyMovenment>().Follow();
         }
     }
 }

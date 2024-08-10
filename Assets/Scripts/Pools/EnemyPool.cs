@@ -4,10 +4,10 @@ using UnityEngine.Pool;
 public class EnemyPool : MonoBehaviour
 {
     public static EnemyPool Instance { get; private set; }
-    public ObjectPool<Enemy> enemyPool;
+    public ObjectPool<MeleeEnemy> enemyPool;
     private Transform enemiesParent;
 
-    [SerializeField] private Enemy enemyPrefab;
+    [SerializeField] private MeleeEnemy enemyPrefab;
 
     private void Awake()
     {
@@ -32,26 +32,26 @@ public class EnemyPool : MonoBehaviour
         enemiesParent = new GameObject("Enemies").transform;
     }
 
-    private Enemy CreateEnemy()
+    private MeleeEnemy CreateEnemy()
     {
-        Enemy enemy = Instantiate(enemyPrefab);
+        MeleeEnemy enemy = Instantiate(enemyPrefab);
         enemy.transform.SetParent(enemiesParent);
         return enemy;
     }
 
-    private void OnGetEnemy(Enemy enemy)
+    private void OnGetEnemy(MeleeEnemy enemy)
     {
         enemy.gameObject.SetActive(true);
         enemy.transform.position = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), 0);
     }
 
-    private void OnReleaseEnemy(Enemy enemy)
+    private void OnReleaseEnemy(MeleeEnemy enemy)
     {
         enemy.GetComponent<EnemyMovenment>().player = null;
         enemy.gameObject.SetActive(false);
     }
 
-    private void OnDestroyEnemy(Enemy enemy)
+    private void OnDestroyEnemy(MeleeEnemy enemy)
     {
         Destroy(enemy.gameObject);
     }
