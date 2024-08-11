@@ -9,6 +9,8 @@ public abstract class EnemyAttack : MonoBehaviour
     protected Player player;
     protected float attackTimer;
 
+    protected abstract void Attack();
+
     protected virtual void Start()
     {
         attackTimer = attackDelay;
@@ -17,10 +19,6 @@ public abstract class EnemyAttack : MonoBehaviour
     protected virtual void Update()
     {
         Attack();
-    }
-
-    protected virtual void Attack()
-    {
     }
 
     public void SetFollow(Player player)
