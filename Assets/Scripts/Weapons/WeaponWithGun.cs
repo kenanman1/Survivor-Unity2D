@@ -21,13 +21,14 @@ public class WeaponWithGun : Weapon
 
         if (attackReload <= 0)
         {
-            GameObject bulletInstance = Instantiate(bulletObject, transform.position, Quaternion.identity);
-            Bullet bullet = bulletInstance.GetComponent<Bullet>();
-            bullet.SetEnemy(closestEnemy);
+            Vector2 direction = (closestEnemy.transform.position - transform.position).normalized;
+
+            CottonCandyBullet bulletInstance = CottonCandyBulletPool.Instance.bulletPool.Get();
+            bulletInstance.transform.position = transform.position;
+            bulletInstance.SetDirection(direction);
             Wait();
         }
         else
             attackReload -= Time.deltaTime;
-
     }
 }

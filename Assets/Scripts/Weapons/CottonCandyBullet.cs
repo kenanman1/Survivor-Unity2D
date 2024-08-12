@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class RangeEnemyBullet : Bullet
+public class CottonCandyBullet : Bullet
 {
     protected override IEnumerator AutoReturnToPool(float delay)
     {
         yield return base.AutoReturnToPool(delay);
-        SeedPool.Instance.seedPool.Release(this);
+        CottonCandyBulletPool.Instance.bulletPool.Release(this);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -14,13 +14,13 @@ public class RangeEnemyBullet : Bullet
         if (hasHit)
             return;
 
-        if (collision.CompareTag("Player"))
+        if (collision.tag == "Enemy")
         {
             StopAllCoroutines();
             hasHit = true;
-            collision.GetComponent<PlayerController>().TakeDamageFromPlayer(damage);
+            collision.GetComponent<EnemyController>().TakeDamageFromEnemy(damage);
 
-            SeedPool.Instance.seedPool.Release(this);
+            CottonCandyBulletPool.Instance.bulletPool.Release(this);
         }
     }
 }
