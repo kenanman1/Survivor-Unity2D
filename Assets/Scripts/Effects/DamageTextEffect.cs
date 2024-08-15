@@ -24,15 +24,26 @@ public class DamageTextEffect : MonoBehaviour
         textOriginalPosition = enemyDamageText.rectTransform.localPosition;
     }
 
-    public void AnimateDamageText(float damage)
+    public void AnimateDamageText(float damage, bool IsCritical = false)
     {
         if (currentTweens.Count > 0)
             OnAnimationComplete();
 
         enemyDamageText.text = damage.ToString();
 
-        currentTweens.Add(LeanTween.scale(enemyDamageText.rectTransform, Vector3.one * textScaleAnimation, textParticleDuration).setLoopPingPong(1).setOnComplete(OnAnimationComplete));
-        currentTweens.Add(LeanTween.move(enemyDamageText.rectTransform, enemyDamageText.rectTransform.localPosition + Vector3.up * textMoveAnimation, textParticleDuration).setLoopPingPong(1).setOnComplete(OnAnimationComplete));
+        if (IsCritical)
+        {
+            enemyDamageText.color = Color.red;
+            currentTweens.Add(LeanTween.scale(enemyDamageText.rectTransform, Vector3.one * textScaleAnimation * 1.5f, textParticleDuration).setLoopPingPong(1).setOnComplete(OnAnimationComplete));
+            currentTweens.Add(LeanTween.move(enemyDamageText.rectTransform, enemyDamageText.rectTransform.localPosition + Vector3.up * textMoveAnimation, textParticleDuration).setLoopPingPong(1).setOnComplete(OnAnimationComplete));
+        }
+        else
+        {
+            enemyDamageText.color = Color.white;
+            currentTweens.Add(LeanTween.scale(enemyDamageText.rectTransform, Vector3.one * textScaleAnimation, textParticleDuration).setLoopPingPong(1).setOnComplete(OnAnimationComplete));
+            currentTweens.Add(LeanTween.move(enemyDamageText.rectTransform, enemyDamageText.rectTransform.localPosition + Vector3.up * textMoveAnimation, textParticleDuration).setLoopPingPong(1).setOnComplete(OnAnimationComplete));
+        }
+
     }
 
     private void OnAnimationComplete()

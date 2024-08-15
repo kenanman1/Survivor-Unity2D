@@ -8,12 +8,12 @@ public class EnemyHealth : MonoBehaviour
     [Header("Enemy Effects")]
     [SerializeField] private ParticleSystem particle;
 
-    public void TakeDamageFromEnemy(float damage)
+    public void TakeDamageFromEnemy(float damage, bool isCritical = false)
     {
         health -= damage;
         if (health <= 0)
             Die();
-        GetComponent<EnemyController>().DamageTextEffect(damage);
+        GetComponent<EnemyController>().DamageTextEffect(damage, isCritical);
     }
 
     private void Die()

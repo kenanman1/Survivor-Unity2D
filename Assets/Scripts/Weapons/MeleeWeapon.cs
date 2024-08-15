@@ -9,7 +9,8 @@ public class MeleeWeapon : Weapon
 
     protected override void Start()
     {
-        base.Start(); originalOffset = transform.localPosition;
+        base.Start();
+        originalOffset = transform.localPosition;
     }
 
     protected override void Update()

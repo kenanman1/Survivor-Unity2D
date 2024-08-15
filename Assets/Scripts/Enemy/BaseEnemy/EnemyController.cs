@@ -5,14 +5,14 @@ using UnityEngine;
 /// </summary>
 public class EnemyController : MonoBehaviour
 {
-    public void TakeDamageFromEnemy(float damage)
+    public void TakeDamageFromEnemy(float damage, bool isCritical = false)
     {
-        GetComponent<EnemyHealth>().TakeDamageFromEnemy(damage);
+        GetComponent<EnemyHealth>().TakeDamageFromEnemy(damage, isCritical);
     }
 
-    public void DamageTextEffect(float damage)
+    public void DamageTextEffect(float damage, bool isCritical = false)
     {
-        GetComponentInChildren<DamageTextEffect>().AnimateDamageText(damage);
+        GetComponentInChildren<DamageTextEffect>().AnimateDamageText(damage, isCritical);
     }
 
     public Color GetColor()

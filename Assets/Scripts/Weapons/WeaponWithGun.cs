@@ -4,16 +4,6 @@ public class WeaponWithGun : Weapon
 {
     [SerializeField] private GameObject bulletObject;
 
-    protected override void Start()
-    {
-        base.Start();
-    }
-
-    protected override void Update()
-    {
-        Attack();
-    }
-
     protected override void Attack()
     {
         if (!CheckForNearbyEnemies())

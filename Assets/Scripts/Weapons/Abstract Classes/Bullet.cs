@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Bullet : MonoBehaviour
 {
+    [Header("Bullet Settings")]
     [SerializeField] protected float speed = 20f;
     [SerializeField] protected float damage = 25f;
     [SerializeField] protected float lifeTime = 5f;
