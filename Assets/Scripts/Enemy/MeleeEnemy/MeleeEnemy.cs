@@ -25,6 +25,7 @@ public class MeleeEnemy : Enemy
 
     public override void ReleaseEnemyToPool()
     {
-        EnemyPool.Instance.enemyPool.Release(this);
+        if (gameObject.activeSelf)
+            EnemyPool.Instance.enemyPool.Release(this);
     }
 }

@@ -19,8 +19,8 @@ public class Bullet : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        StartCoroutine(AutoReturnToPool(lifeTime));
         hasHit = false;
+        StartCoroutine(AutoReturnToPool(lifeTime));
     }
 
     public void SetDirection(Vector3 direction)

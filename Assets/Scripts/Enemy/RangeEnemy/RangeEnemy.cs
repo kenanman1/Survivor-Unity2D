@@ -41,6 +41,7 @@ public class RangeEnemy : Enemy
 
     public override void ReleaseEnemyToPool()
     {
-        RangeEnemyPool.Instance.enemyPool.Release(this);
+        if (gameObject.activeSelf)
+            RangeEnemyPool.Instance.enemyPool.Release(this);
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -14,6 +15,8 @@ public abstract class Enemy : MonoBehaviour
 
     [Header("Enemy Settings")]
     [SerializeField] protected float fadeTime = 0.6f;
+
+    public static Action<Vector2> onDie;
 
     protected SpriteRenderer spawnIndicator;
     protected Player player;

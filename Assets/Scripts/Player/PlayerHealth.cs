@@ -7,9 +7,6 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] public float maxHealth = 100f;
     private float health;
 
-    [Header("UI")]
-    [SerializeField] private TextMeshProUGUI playerHealthText;
-
     private void Start()
     {
         health = maxHealth;
@@ -33,6 +30,6 @@ public class PlayerHealth : MonoBehaviour
 
     private void UpdateText()
     {
-        playerHealthText.text = $"Health: {health}/{maxHealth}";
+        UIManager.Instance.UpdatePlayerText(health, maxHealth);
     }
 }

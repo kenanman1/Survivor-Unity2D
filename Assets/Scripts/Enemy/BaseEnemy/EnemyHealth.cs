@@ -23,6 +23,8 @@ public class EnemyHealth : MonoBehaviour
         var main = damageParticle.main;
         main.startColor = GetComponent<EnemyController>().GetColor();
         damageParticle.Play();
+        print("Enemy died at: " + transform.position);
+        Enemy.onDie?.Invoke(transform.position);
 
         GetComponent<EnemyController>().ReleaseEnemyToPool();
     }
