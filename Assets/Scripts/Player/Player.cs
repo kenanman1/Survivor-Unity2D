@@ -5,20 +5,37 @@
 [RequireComponent(typeof(PlayerController))]
 public class Player : MonoBehaviour
 {
-    private float CandyCount { get; set; }
-    private float CashCount { get; set; }
+    private float TotalCandyCount { get; set; }
+    private float TotalCashCount { get; set; }
+    public float CandyToLevelUp { get; set; } = 5;
+    private float Level { get; set; } = 1;
 
+    private void Update()
+    {
+        LevelUp();
+    }
 
     public void AddCandy(float count = 1)
     {
-        CandyCount += count;
-        UIManager.Instance.UpdateCandyText(CandyCount);
+        TotalCandyCount += count;
+        UIManager.Instance.UpdateCandyText(TotalCandyCount);
+        UIManager.Instance.UpdateLevelSlider(TotalCandyCount);
     }
-
 
     public void AddCash(float count = 1)
     {
-        CashCount += count;
-        UIManager.Instance.UpdateCashText(CashCount);
+        TotalCashCount += count;
+        UIManager.Instance.UpdateCashText(TotalCashCount);
+    }
+
+    private void LevelUp()
+    {
+        if (TotalCandyCount >= CandyToLevelUp)
+        {
+            Level++;
+            CandyToLevelUp = Mathf.RoundToInt(CandyToLevelUp * 1.5f);
+            UIManager.Instance.UpdateLevelText(Level);
+            UIManager.Instance.RestoreLevelSlider(CandyToLevelUp);
+        }
     }
 }
