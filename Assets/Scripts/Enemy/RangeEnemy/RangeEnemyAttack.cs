@@ -18,7 +18,7 @@ public class RangeEnemyAttack : EnemyAttack
 
     protected override void Attack()
     {
-        if (player == null)
+        if (player == null || spawnIndicator.enabled)
             return;
 
         if (Vector3.Distance(transform.position, player.transform.position) < playerDetection)

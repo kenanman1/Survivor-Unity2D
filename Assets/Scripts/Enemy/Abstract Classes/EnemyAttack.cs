@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public abstract class EnemyAttack : MonoBehaviour
@@ -8,12 +9,15 @@ public abstract class EnemyAttack : MonoBehaviour
 
     protected Player player;
     protected float attackTimer;
+    protected SpriteRenderer spawnIndicator;
 
     protected abstract void Attack();
 
     protected virtual void Start()
     {
         attackTimer = attackDelay;
+        SpriteRenderer[] spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        spawnIndicator = spriteRenderers.FirstOrDefault(sr => sr.gameObject.name == "Spawn Indicator");
     }
 
     protected virtual void Update()

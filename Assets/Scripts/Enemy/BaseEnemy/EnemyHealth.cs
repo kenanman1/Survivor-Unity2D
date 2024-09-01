@@ -8,6 +8,13 @@ public class EnemyHealth : MonoBehaviour
     [Header("Enemy Effects")]
     [SerializeField] private ParticleSystem particle;
 
+    private float maxHealth;
+
+    private void Start()
+    {
+        maxHealth = health;
+    }
+
     public void TakeDamageFromEnemy(float damage, bool isCritical = false)
     {
         health -= damage;
@@ -23,7 +30,8 @@ public class EnemyHealth : MonoBehaviour
         var main = damageParticle.main;
         main.startColor = GetComponent<EnemyController>().GetColor();
         damageParticle.Play();
-        print("Enemy died at: " + transform.position);
+        health = maxHealth;
+
         Enemy.onDie?.Invoke(transform.position);
 
         GetComponent<EnemyController>().ReleaseEnemyToPool();

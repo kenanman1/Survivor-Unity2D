@@ -464,5 +464,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDelay: 1
-  playerDetection: 1
+  playerDetection: 1.5
   attackDamage: 1

@@ -18,7 +18,7 @@ public class MeleeEnemy : Enemy
     }
 
     protected override void StartFollow()
-    { 
+    {
         base.StartFollow();
         enemyAttack.SetFollow(player);
     }

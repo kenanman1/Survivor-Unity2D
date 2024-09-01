@@ -3,6 +3,7 @@ using UnityEngine;
 public class DropManager : MonoBehaviour
 {
     [SerializeField] private Candy candyPrefab;
+    [SerializeField] private float candyDropChance = 70f;
 
     private void Awake()
     {
@@ -16,10 +17,10 @@ public class DropManager : MonoBehaviour
 
     private void Drop(Vector2 vector)
     {
-        if (Random.Range(0, 100) < 50)
-            DropCash(vector);
-        else
+        if (Random.Range(0, 100) <= candyDropChance)
             DropCandy(vector);
+        else
+            DropCash(vector);
     }
 
     private void DropCandy(Vector2 vector)

@@ -19,7 +19,7 @@ public class RangeEnemy : Enemy
 
     private void Update()
     {
-        if (player != null)
+        if (player != null && !spawnIndicator.enabled)
             Aim();
     }
 
@@ -36,7 +36,7 @@ public class RangeEnemy : Enemy
         direction.Normalize();
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
-        LeanTween.rotate(gameObject, rotation.eulerAngles, rotationSpeed);
+        LeanTween.rotate(gameObject, rotation.eulerAngles, 0.01f);
     }
 
     public override void ReleaseEnemyToPool()

@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyDetectionRadius: 8
-  attackReload: 1
+  attackReload: 0.8
   rotationSpeed: 0.2
   attackDamage: 1
   bulletObject: {fileID: 2825165252477072610, guid: 1e926274f6b925448aa80d5939efc63d, type: 3}

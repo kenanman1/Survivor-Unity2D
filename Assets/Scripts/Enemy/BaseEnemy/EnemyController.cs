@@ -31,6 +31,9 @@ public class EnemyController : MonoBehaviour
     {
         var enemy = GetComponent<Enemy>();
         if (enemy != null)
+        {
+            enemy.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             enemy.ReleaseEnemyToPool();
+        }
     }
 }

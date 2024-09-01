@@ -15,16 +15,13 @@ public class RangeEnemyPool : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            enemyPool = new(CreateEnemy, OnGetEnemy, OnReleaseEnemy, OnDestroyEnemy, true, 100, 1000);
+            CreateEnemiesParent();
         }
         else
         {
             Destroy(gameObject);
         }
-    }
-    private void Start()
-    {
-        enemyPool = new(CreateEnemy, OnGetEnemy, OnReleaseEnemy, OnDestroyEnemy, true, 100, 1000);
-        CreateEnemiesParent();
     }
 
     private void CreateEnemiesParent()
@@ -42,7 +39,6 @@ public class RangeEnemyPool : MonoBehaviour
     private void OnGetEnemy(RangeEnemy enemy)
     {
         enemy.gameObject.SetActive(true);
-        enemy.transform.position = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), 0);
     }
 
     private void OnReleaseEnemy(RangeEnemy enemy)

@@ -2,6 +2,15 @@
 
 public class Candy : Collectable
 {
+    public override void ReleaseCollectableToPool()
+    {
+        if (gameObject.activeSelf)
+        {
+            gameObject.SetActive(false);
+            CandyPool.Instance.candyPool.Release(this);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player" && !isCollected)
@@ -11,11 +20,7 @@ public class Candy : Collectable
             isMoving = false;
             Player player = collision.GetComponent<Player>();
             player.AddCandy();
-            if (gameObject.activeSelf)
-            {
-                gameObject.SetActive(false);
-                CandyPool.Instance.candyPool.Release(this);
-            }
+            ReleaseCollectableToPool();
         }
     }
 }

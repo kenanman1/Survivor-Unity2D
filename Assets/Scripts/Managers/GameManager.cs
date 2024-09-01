@@ -11,15 +11,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        while (count > 0)
-        {
-            SpawnEnemy();
-            count--;
-        }
-    }
 
-    private void SpawnEnemy()
-    {
-        FindObjectOfType<EnemyPool>().enemyPool.Get();
     }
 }

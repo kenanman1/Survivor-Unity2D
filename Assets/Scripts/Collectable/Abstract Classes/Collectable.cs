@@ -9,6 +9,8 @@ public abstract class Collectable : MonoBehaviour
     protected bool isMoving = false;
     protected Player player;
 
+    public abstract void ReleaseCollectableToPool();
+
     protected void Start()
     {
         player = FindObjectOfType<Player>();

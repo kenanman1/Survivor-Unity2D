@@ -20,7 +20,7 @@ public class SeedPool : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+
     private void Start()
     {
         seedPool = new ObjectPool<RangeEnemyBullet>(CreateSeed, OnGetSeed, OnReleaseSeed, OnDestroySeed, true, 100, 1000);

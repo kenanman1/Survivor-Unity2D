@@ -43,7 +43,6 @@ public class DamageTextEffect : MonoBehaviour
             currentTweens.Add(LeanTween.scale(enemyDamageText.rectTransform, Vector3.one * textScaleAnimation, textParticleDuration).setLoopPingPong(1).setOnComplete(OnAnimationComplete));
             currentTweens.Add(LeanTween.move(enemyDamageText.rectTransform, enemyDamageText.rectTransform.localPosition + Vector3.up * textMoveAnimation, textParticleDuration).setLoopPingPong(1).setOnComplete(OnAnimationComplete));
         }
-
     }
 
     private void OnAnimationComplete()
