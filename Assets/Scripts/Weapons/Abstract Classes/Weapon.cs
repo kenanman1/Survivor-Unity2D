@@ -22,6 +22,8 @@ public abstract class Weapon : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (Time.timeScale == 0)
+            return;
         Attack();
     }
 

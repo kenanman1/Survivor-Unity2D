@@ -19,6 +19,8 @@ public class RangeEnemy : Enemy
 
     private void Update()
     {
+        if (Time.timeScale == 0)
+            return;
         if (player != null && !spawnIndicator.enabled)
             Aim();
     }

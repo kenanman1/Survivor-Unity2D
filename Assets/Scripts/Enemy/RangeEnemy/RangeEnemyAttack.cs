@@ -6,16 +6,6 @@ public class RangeEnemyAttack : EnemyAttack
     [SerializeField] private float scaleAnimation = 0.3f;
     [SerializeField] private float scaleAnimationTime = 0.2f;
 
-    protected override void Start()
-    {
-        base.Start();
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-    }
-
     protected override void Attack()
     {
         if (player == null || spawnIndicator.enabled)

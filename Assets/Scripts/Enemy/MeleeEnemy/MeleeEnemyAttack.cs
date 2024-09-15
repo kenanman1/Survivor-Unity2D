@@ -5,16 +5,6 @@ public class MeleeEnemyAttack : EnemyAttack
     [Header("Attack Settings")]
     [SerializeField] private float attackDamage = 1f;
 
-    protected override void Start()
-    {
-        base.Start();
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-    }
-
     protected override void Attack()
     {
         if (player == null || spawnIndicator.enabled)
