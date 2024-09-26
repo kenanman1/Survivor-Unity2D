@@ -5,13 +5,25 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     [Header("Wave Settings")]
+    public static WaveManager instance;
+
+    [SerializeField] private int maxWave = 10;
+    private int currentWave = 0;
+
     private Wave[] waves;
     private float timeBetweenWaves = 10f;
 
-    private int currentWave = 0;
     private float timeBetweenWavesIncrease = 1.05f;
     private float rangeEnemyIncrease = 1.1f;
     private float meleeEnemyIncrease = 1.4f;
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+    }
 
     private void Start()
     {
@@ -20,7 +32,7 @@ public class WaveManager : MonoBehaviour
 
     public void StartWaves()
     {
-        StartCoroutine(SpawnInfiniteWaves());
+        StartCoroutine(SpawnWaves());
     }
 
     public void StopWaves()
@@ -28,18 +40,21 @@ public class WaveManager : MonoBehaviour
         StopAllCoroutines();
     }
 
-    private IEnumerator SpawnInfiniteWaves()
+    private IEnumerator SpawnWaves()
     {
-        while (true)
+        while (currentWave < maxWave)
         {
             currentWave++;
-            UIManager.Instance.UpdateWaveText(currentWave);
+            UIManager.Instance.UpdateWaveText(currentWave, maxWave);
 
             Wave wave = GenerateWave(currentWave);
             yield return StartCoroutine(SpawnWave(wave));
 
-            UIManager.Instance.UpdateWaveCountdownText(timeBetweenWaves);
-            yield return new WaitForSeconds(timeBetweenWaves);
+            if (currentWave < maxWave)
+            {
+                UIManager.Instance.UpdateWaveCountdownText(timeBetweenWaves);
+                yield return new WaitForSeconds(timeBetweenWaves);
+            }
 
             timeBetweenWaves = timeBetweenWaves * timeBetweenWavesIncrease;
         }
@@ -89,7 +104,7 @@ public class WaveManager : MonoBehaviour
                 break;
             case EnemyType.Range:
                 RangeEnemy rangeEnemy = RangeEnemyPool.Instance.enemyPool.Get();
-                rangeEnemy.transform.position = new Vector2(Random.Range(-10, 10), Random.Range(-10, 10));
+                rangeEnemy.transform.position = new Vector2(Random.Range(-10, 10), UnityEngine.Random.Range(-10, 10));
                 break;
         }
     }

@@ -6,7 +6,9 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected float enemyDetectionRadius = 5f;
     [SerializeField] protected float attackReload = 1f;
     [SerializeField] protected float rotationSpeed = 0.2f;
-    [SerializeField] protected float attackDamage = 1f;
+    [SerializeField] public float attackDamage = 1f;
+
+    public WeaponTypes weaponType;
 
     protected LayerMask enemyLayer;
     protected float timeReload;

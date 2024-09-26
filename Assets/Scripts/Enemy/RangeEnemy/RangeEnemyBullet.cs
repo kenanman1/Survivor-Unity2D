@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class RangeEnemyBullet : Bullet
 {
+    public float damage;
+
     protected override IEnumerator AutoReturnToPool(float delay)
     {
         yield return base.AutoReturnToPool(delay);

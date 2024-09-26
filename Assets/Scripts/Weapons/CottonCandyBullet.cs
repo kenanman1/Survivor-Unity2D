@@ -5,6 +5,7 @@ public class CottonCandyBullet : Bullet
 {
     [Header("Bullet Settings")]
     [SerializeField] private float criticalChance = 40;
+    public float attackDamage;
 
     protected override IEnumerator AutoReturnToPool(float delay)
     {
@@ -22,7 +23,7 @@ public class CottonCandyBullet : Bullet
             StopAllCoroutines();
             hasHit = true;
             bool isCritical = Random.Range(0, 100) < criticalChance;
-            float newDamage = isCritical ? damage * 2 : damage;
+            float newDamage = isCritical ? attackDamage * 2 : attackDamage;
             collision.GetComponent<EnemyHealth>().TakeDamageFromEnemy(newDamage, isCritical);
 
             CottonCandyBulletPool.Instance.bulletPool.Release(this);

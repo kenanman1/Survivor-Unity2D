@@ -6,7 +6,6 @@ public class Bullet : MonoBehaviour
 {
     [Header("Bullet Settings")]
     [SerializeField] protected float speed = 20f;
-    [SerializeField] protected float damage = 25f;
     [SerializeField] protected float lifeTime = 5f;
 
     protected bool hasHit = false; // Prevents multiple hits

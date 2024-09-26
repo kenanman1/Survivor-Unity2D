@@ -8,7 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyHealth))]
 [RequireComponent(typeof(EnemyMovenment))]
 [RequireComponent(typeof(EnemyController))]
-public abstract class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour, IPlayerDependent
 {
     [Header("Components")]
     protected EnemyMovenment enemyMovenment;
@@ -17,9 +17,9 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float fadeTime = 0.6f;
 
     public static Action<Vector2> onDie;
+    public Player player;
 
     protected SpriteRenderer spawnIndicator;
-    protected Player player;
 
     public abstract void ReleaseEnemyToPool();
 
@@ -73,5 +73,10 @@ public abstract class Enemy : MonoBehaviour
             return;
 
         enemyMovenment.SetFollow(player);
+    }
+
+    public void ClearPlayerReference()
+    {
+        player = null;
     }
 }

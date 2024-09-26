@@ -70,9 +70,9 @@ public class UIManager : MonoBehaviour
         levelText.text = $"Level: {level}";
     }
 
-    public void UpdateWaveText(float wave)
+    public void UpdateWaveText(int wave, int maxWave)
     {
-        waveText.text = $"Wave: {wave}";
+        waveText.text = $"Wave: {wave}/{maxWave}";
         LeanTween.scale(waveText.gameObject, new Vector3(waveScaleAnimation, waveScaleAnimation, waveScaleAnimation), waveTextAnimationDuration).setEasePunch();
     }
 

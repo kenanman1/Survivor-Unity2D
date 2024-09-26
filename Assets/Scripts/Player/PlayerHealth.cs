@@ -4,7 +4,8 @@ public class PlayerHealth : MonoBehaviour
 {
     [Header("Player Settings")]
     [SerializeField] public float maxHealth = 100f;
-    private float health;
+
+    public float health;
 
     private void Start()
     {
@@ -14,17 +15,19 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamageFromPlayer(float damage)
     {
+        health -= damage;
         if (health <= 0)
         {
-            Die();
+            OnPlayerDeath();
             return;
         }
-        health -= damage;
         UpdateText();
     }
 
-    private void Die()
+    private void OnPlayerDeath()
     {
+        GetComponent<PlayerController>().OnPlayerDeath();
+        LeanTween.rotate(gameObject, new Vector3(0, 0, -90), 1f);
     }
 
     private void UpdateText()

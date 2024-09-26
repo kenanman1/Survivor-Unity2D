@@ -5,6 +5,11 @@ using UnityEngine;
 /// </summary>
 public class EnemyController : MonoBehaviour
 {
+    private void Start()
+    {
+        PlayerController.OnPlayerDeathEvent += UnfollowPlayer;
+    }
+
     public void TakeDamageFromEnemy(float damage, bool isCritical = false)
     {
         GetComponent<EnemyHealth>().TakeDamageFromEnemy(damage, isCritical);
@@ -34,6 +39,14 @@ public class EnemyController : MonoBehaviour
         {
             enemy.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             enemy.ReleaseEnemyToPool();
+        }
+    }
+
+    private void UnfollowPlayer()
+    {
+        foreach (IPlayerDependent playerDependent in GetComponentsInChildren<IPlayerDependent>())
+        {
+            playerDependent.ClearPlayerReference();
         }
     }
 }

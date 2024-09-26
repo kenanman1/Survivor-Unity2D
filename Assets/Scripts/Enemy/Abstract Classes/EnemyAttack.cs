@@ -1,13 +1,14 @@
 using System.Linq;
 using UnityEngine;
 
-public abstract class EnemyAttack : MonoBehaviour
+public abstract class EnemyAttack : MonoBehaviour, IPlayerDependent
 {
     [Header("Attack Settings")]
     [SerializeField] protected float attackDelay = 1f;
     [SerializeField] protected float playerDetection = 1f;
 
-    protected Player player;
+    public Player player;
+
     protected float attackTimer;
     protected SpriteRenderer spawnIndicator;
 
@@ -39,5 +40,10 @@ public abstract class EnemyAttack : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, playerDetection);
+    }
+
+    public void ClearPlayerReference()
+    {
+        player = null;
     }
 }

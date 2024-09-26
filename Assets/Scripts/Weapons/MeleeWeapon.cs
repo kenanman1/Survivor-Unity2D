@@ -11,6 +11,7 @@ public class MeleeWeapon : Weapon
     {
         base.Start();
         originalOffset = transform.localPosition;
+        weaponType = WeaponTypes.Melee;
     }
 
     protected override void Update()
